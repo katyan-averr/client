@@ -3,10 +3,6 @@ import {makeAutoObservable} from "mobx";
 export default class GroupStore{
     constructor() {
         this._groups = [
-            {id:1, name: 'ИСТб 19-1'},
-            {id:2, name: 'ИСТб 19-2'},
-            {id:3, name: 'ИСМб 19-1'},
-            {id:4, name: 'ИБб 19-1'},
         ]
         makeAutoObservable(this)
     }

@@ -5,14 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GroupStore from './store/GroupStore';
 import StudentStore from './store/StudentStore';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import MeetingStore from './store/MeetingStore';
 
 export const Context = createContext(null)
+console.log(process.env.REACT_APP_API_URL)
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Context.Provider value={{
       group: new GroupStore(),
       student: new StudentStore(),
+      meeting: new MeetingStore(),
     }}>
     <App />
     </Context.Provider>

@@ -1,7 +1,10 @@
-import React from "react";
-import {Button, Form, Modal} from "react-bootstrap";
+import React,{ useContext, createContext, useState } from 'react';
+import { Context } from '..';
+import {Button, Dropdown, Form, Modal} from "react-bootstrap";
 
 const AddMeetings = ({show, onHide}) => {
+    const {student} = useContext(Context)
+    
     return(
         <Modal
             show ={show}
@@ -15,11 +18,22 @@ const AddMeetings = ({show, onHide}) => {
       </Modal.Header>
       <Modal.Body>
         <Form>
-            <Form.Control 
-                placeholder={"Введите причину встречи"}
+            <Dropdown>
+                <Dropdown.Toggle className="mt-2 mb-2">Студент</Dropdown.Toggle>
+                <Dropdown.Menu>
+                    {student.students.map(student =>
+                      <Dropdown.Item 
+                        onClick={() => student.setSelectedStudent(student)} 
+                        key={student.id}>{student.FIO}
+                      </Dropdown.Item>
+                      )}
+                </Dropdown.Menu>
+            </Dropdown>
+            <Form.Control className="mt-2 mb-2"
+                placeholder={"Причина встречи"}
             />
-            <Form.Control 
-                placeholder={"Введите результат встречи"}
+            <Form.Control className="mt-2 mb-2"
+                placeholder={"Результат встречи"}
             />
         </Form>
       </Modal.Body>

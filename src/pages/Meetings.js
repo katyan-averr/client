@@ -9,7 +9,7 @@ import GroupSelection from "../components/GroupSelection"
 
 const Meetings = observer(() => {
   const [AddMeetingVisible, setAddMeetingVisible] = useState(false)
-
+  const {meeting} = useContext(Context)
   return (
     <Container className="container main_margins">
       
@@ -43,30 +43,14 @@ const Meetings = observer(() => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Иванов Иван Иванович</td>
-                    <td>Какая-то причина</td>
-                    <td>Какой-то результат</td>
+                {meeting.meetings.map(meeting =>
+                  <tr key={meeting.id}>
+                    <th scope="row">{meeting.id}</th>
+                    <td>{meeting.FIO}</td>
+                    <td>{meeting.reason}</td>
+                    <td>{meeting.result}</td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Иванов Иван Иванович</td>
-                    <td>Какая-то причина</td>
-                    <td>Какой-то результат</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Иванов Иван Иванович</td>
-                    <td>Какая-то причина</td>
-                    <td>Какой-то результат</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Иванов Иван Иванович</td>
-                    <td>Какая-то причина</td>
-                    <td>Какой-то результат</td>
-                  </tr>
+                )}
                 </tbody>
               </table>
             </td>
