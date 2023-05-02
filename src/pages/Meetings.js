@@ -57,7 +57,7 @@ const Meetings = observer(() => {
                 {item.map(meeting =>
                   <tr key={meeting.id}>
                     <th scope="row">{meeting.id}</th>
-                    <td>{meeting.id}</td>
+                    <td>{meeting.studentId}</td>
                     <td>{meeting.reason}</td>
                     <td>{meeting.result}</td>
                   </tr>
