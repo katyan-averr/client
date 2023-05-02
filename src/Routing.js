@@ -7,6 +7,7 @@ import Grade from './pages/Grade';
 import Meetings from './pages/Meetings';
 import Schedule from './pages/Schedule';
 import Teachers from './pages/Teachers';
+import Divisions from './pages/Divisions';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function Routing() {
@@ -22,6 +23,7 @@ function Routing() {
                 <Route path='/meetings' element={<Meetings/>} />
                 <Route path='/schedule' element={<Schedule/>} />
                 <Route path='/teachers' element={<Teachers/>} />
+                <Route path='/divisions' element={<Divisions/>} />
               </Routes>
           </BrowserRouter>
     );

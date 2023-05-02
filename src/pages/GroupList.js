@@ -1,12 +1,26 @@
 import "../App.css";
 import { Link } from 'react-router-dom';
+import GroupSelection from "../components/GroupSelection"
+import axios from "axios";
+import React, { useContext, createContext, useEffect, useState } from "react";
+import { Context } from '..';
+import { observer } from 'mobx-react-lite';
 
-function GroupList() {
+const GroupList = observer(() => {
+  const {student} = useContext(Context)
+  const [item, setItems] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/students")
+      .then((response) => setItems(response.data));
+  }, []);
+
   return (
     <div className="container main_margins">
       <table>
           <tr>
-            <td width={'33%'}>
+            <td width={'15%'}>
             <Link to={'/'}>
               <button
                 type="button"
@@ -16,33 +30,9 @@ function GroupList() {
               </button>
               </Link>
             </td>
-            <td width={'33%'} className="heading">Список группы</td>
-            <td width={'33%'}>
-              <div className="group_selection">
-                <button
-                  className="btn btn-primary dropdown-toggle button_menu"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Группа
-                </button>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton1"
-                >
-                  <li>
-                    <a className="dropdown-item">ИСТб 19-1</a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item">ИСТб 19-2</a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item">ИСМб 19-1</a>
-                  </li>
-                </ul>
-              </div>
+            <td width={'70%'} className="heading">Список группы</td>
+            <td width={'15%'} >
+              <GroupSelection  />
             </td>
           </tr>
           <tr>
@@ -55,22 +45,12 @@ function GroupList() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Иванов Иван Иванович</td>
+                {item.map(student =>
+                  <tr key={student.id}>
+                    <th scope="row">{student.id}</th>
+                    <td>{student.FIO}</td>
                   </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Петров Петр Петрович</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Иванов Иван Иванович</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>Петров Петр Петрович</td>
-                  </tr>
+                )}
                 </tbody>
               </table>
             </td>
@@ -78,6 +58,6 @@ function GroupList() {
       </table>
     </div>
   );
-}
+})
 
 export default GroupList;

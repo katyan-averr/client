@@ -1,15 +1,26 @@
 import "../App.css";
 import { Link } from 'react-router-dom';
 import AddMeetings from "../components/AddMeetings"
-import React,{ useContext, createContext, useState } from 'react';
+import React, { useContext, createContext, useEffect, useState } from "react";
 import { Context } from '..';
 import { observer } from 'mobx-react-lite';
 import { Container } from "react-bootstrap";
 import GroupSelection from "../components/GroupSelection"
+import axios from "axios";
+
 
 const Meetings = observer(() => {
   const [AddMeetingVisible, setAddMeetingVisible] = useState(false)
   const {meeting} = useContext(Context)
+  const {student} = useContext(Context)
+  const [item, setItems] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/meetings")
+      .then((response) => setItems(response.data));
+  }, []);
+  
   return (
     <Container className="container main_margins">
       
@@ -43,10 +54,10 @@ const Meetings = observer(() => {
                   </tr>
                 </thead>
                 <tbody>
-                {meeting.meetings.map(meeting =>
+                {item.map(meeting =>
                   <tr key={meeting.id}>
                     <th scope="row">{meeting.id}</th>
-                    <td>{meeting.FIO}</td>
+                    <td>{meeting.id}</td>
                     <td>{meeting.reason}</td>
                     <td>{meeting.result}</td>
                   </tr>

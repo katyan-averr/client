@@ -35,13 +35,6 @@ a{
   font-size: 20px;
 }
 
-.group_selection{
-  position: absolute;
-  right: 0px;
-  margin-right: 100px;
-  margin-top: -22px;
-}
-
 .term_selection{
   position: absolute;
   right: 0px;
@@ -51,6 +44,10 @@ a{
 
 .main_margins{
   margin-top: 15px;
+}
+
+.divisions_margins{
+  margin-top: 30px;
 }
 
 table{

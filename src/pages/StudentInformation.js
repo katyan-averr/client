@@ -1,17 +1,27 @@
 import "../App.css";
 import { Link } from 'react-router-dom';
 import GroupSelection from "../components/GroupSelection"
-import React,{ useContext, createContext } from 'react';
+import React, { useContext, createContext, useEffect, useState } from "react";
 import { Context } from '..';
 import { observer } from 'mobx-react-lite';
+import axios from "axios";
+import moment from 'moment';
 
 const StudentInformation = observer(() => {
   const {student} = useContext(Context)
+  const [item, setItems] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/students")
+      .then((response) => setItems(response.data));
+  }, []);
+
   return (
     <div className="container main_margins">
       <table>
           <tr>
-            <td width={'33%'}>
+            <td width={'15%'}>
             <Link to={'/'}>
               <button
                 type="button"
@@ -21,8 +31,8 @@ const StudentInformation = observer(() => {
               </button>
               </Link>
             </td>
-            <td width={'33%'} className="heading">Сведенья о студентах</td>
-            <td width={'33%'}>
+            <td width={'70%'} className="heading">Сведенья о студентах</td>
+            <td width={'15%'}>
               <GroupSelection />
             </td>
           </tr>
@@ -41,13 +51,13 @@ const StudentInformation = observer(() => {
                   </tr>
                 </thead>
                 <tbody>
-                {student.students.map(student =>
+                {item.map(student =>
                   <tr key={student.id}>
                     <th scope="row">{student.id}</th>
                     <td>{student.FIO}</td>
                     <td>{student.birthdate}</td>
                     <td>{student.contacts}</td>
-                    <td>{student.form_education}</td>
+                    <td>{student.education_form}</td>
                     <td>{student.stud_info}</td>
                     <td>{student.parent_info}</td>
                   </tr>
