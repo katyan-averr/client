@@ -54,7 +54,7 @@ const AddMeetings = observer(({show, onHide}) => {
             />
             <select class="form-select">
               {item.map(student =>
-                <option onClick={() => meeting.setSelectedStudent(student)} key={student.id}>{student.FIO}</option>)}
+                <option key={student.id}>{student.FIO}</option>)}
             </select> 
         </Form>
       </Modal.Body>
