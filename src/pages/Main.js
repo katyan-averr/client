@@ -19,7 +19,7 @@ function Main(){
             </td>
           </tr>
           <tr>
-            <td colspan="3">
+            <td colSpan="3">
             <div className="btn-group-vertical main_margins" role="group" aria-label="Basic outlined example">
                         <Link to={'/groupList'}><button type="button" className="btn btn-outline-primary button_menu menu_width">Список группы</button></Link>
                         <Link to={'/teachers'}><button type="button" className="btn btn-outline-primary button_menu menu_width">Преподаватели</button></Link>

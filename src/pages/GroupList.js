@@ -36,7 +36,7 @@ const GroupList = observer(() => {
             </td>
           </tr>
           <tr>
-            <td colspan="3">
+            <td colSpan="3">
               <table className="table table-striped main_margins">
                 <thead>
                   <tr>

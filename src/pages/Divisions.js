@@ -23,7 +23,7 @@ const Divisions = observer(() => {
           <td width={"15%"}></td>
         </tr>
         <tr>
-          <td colspan="3">
+          <td colSpan="3">
             <div className="divisions_margins">
               <ul>
                 <p>

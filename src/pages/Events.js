@@ -39,7 +39,7 @@ const Events = observer(() => {
             </td>
           </tr>
           <tr>
-            <td colspan="4">
+            <td colSpan="4">
               <table className="table table-striped main_margins">
                 <thead>
                   <tr>
@@ -59,6 +59,7 @@ const Events = observer(() => {
                     <td>{event.place}</td>
                     <td>{event.responsible}</td>
                     <td>{event.date}</td>
+                    <td>{event.student.FIO}</td>
                   </tr>
                 )}
                 </tbody>

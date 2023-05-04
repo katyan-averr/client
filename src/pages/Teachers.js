@@ -6,12 +6,12 @@ import React, { useContext, createContext, useEffect, useState } from "react";
 import { Context } from '..';
 
 function Teachers() {
-  const {teacher} = useContext(Context)
+  const {load} = useContext(Context)
   const [item, setItems] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/teachers")
+      .get("http://localhost:5000/api/loads")
       .then((response) => setItems(response.data));
   }, []);
   return (
@@ -34,23 +34,25 @@ function Teachers() {
             </td>
           </tr>
           <tr>
-            <td colspan="3">
+            <td colSpan="3">
               <table className="table table-striped main_margins">
                 <thead>
                   <tr>
                     <th scope="col">№</th>
                     <th scope="col">ФИО</th>
-                    {/* <th scope="col">Дисциплина</th> */}
+                    <th scope="col">Дисциплина</th>
+                    <th scope="col">Вид занятия</th>
                     <th scope="col">Контакты</th>
                   </tr>
                 </thead>
                 <tbody>
-                {item.map(teacher =>
-                  <tr key={teacher.id}>
-                    <th scope="row">{teacher.id}</th>
-                    <td>{teacher.FIO}</td>
-                    {/* <td>{teacher.discipline}</td> */}
-                    <td>{teacher.contacts}</td>
+                {item.map(load =>
+                  <tr key={load.id}>
+                    <th scope="row">{load.id}</th>
+                    <td>{load.teacher.FIO}</td>
+                    <td>{load.discipline.name}</td>
+                    <td>{load.type}</td>
+                    <td>{load.teacher.contacts}</td>
                   </tr>
                 )}
                 </tbody>

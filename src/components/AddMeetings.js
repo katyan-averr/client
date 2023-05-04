@@ -13,12 +13,12 @@ const AddMeetings = observer(({show, onHide}) => {
     const [result, setResult] = useState('');
 
     const addMeeting = (() =>{
-      const formData = new FormData()
-      formData.append('reason', reason)
-      formData.append('result', result)
-      // formData.append('studentId', meeting.selectedStudent.id)
+      // const formData = new FormData()
+      // formData.append('reason', reason)
+      // formData.append('result', result)
+      // formData.append('studentId', studentId)
       axios
-        .post("http://localhost:5000/api/meetings", formData).then(data => onHide());
+        .post("http://localhost:5000/api/meetings", {reason:reason, result: result, studentId:'1'}).then(data => onHide());
     });
 
     useEffect(() => {
@@ -52,11 +52,10 @@ const AddMeetings = observer(({show, onHide}) => {
                 className="mt-2 mb-2"
                 placeholder={"Результат встречи"}
             />
-            {/* <StudentSelection /> */}
-            {/* <select class="form-select">
+            <select class="form-select">
               {item.map(student =>
                 <option onClick={() => meeting.setSelectedStudent(student)} key={student.id}>{student.FIO}</option>)}
-            </select> */}
+            </select> 
         </Form>
       </Modal.Body>
       <Modal.Footer>

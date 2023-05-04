@@ -4,7 +4,9 @@ export default class MeetingStore{
     constructor() {
         this._meetings = []
         this._students = []
-        this._selectedStudents ={}
+        this._groups = []
+        this._selectedStudent ={}
+        this._selectedGroup ={}
         makeAutoObservable(this)
     }
 
@@ -15,6 +17,9 @@ export default class MeetingStore{
     setStudents(students){
         this._students = students
     }
+    setStudents(groups){
+        this._groups = groups
+    }
 
     setSelectedMeeting(meeting){
         this._selectedMeeting = meeting
@@ -24,12 +29,20 @@ export default class MeetingStore{
         this._selectedStudent = student
     }
 
+    setSelectedGroup(group){
+        this._selectedGroup = group
+    }
+
     get meetings(){
         return this._meetings
     }
 
     get students(){
         return this._students
+    }
+
+    get groups(){
+        return this._groups
     }
     
     get selectedMeeting(){
@@ -38,5 +51,9 @@ export default class MeetingStore{
 
     get selectedStudent(){
         return this._selectedStudent
+    }
+
+    get selectedGroup(){
+        return this._selectedGroup
     }
 }

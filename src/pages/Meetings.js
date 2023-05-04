@@ -43,7 +43,7 @@ const Meetings = observer(() => {
             </td>
           </tr>
           <tr>
-            <td colspan="4">
+            <td colSpan="4">
               <table className="table table-striped main_margins">
                 <thead>
                   <tr>
@@ -57,7 +57,7 @@ const Meetings = observer(() => {
                 {item.map(meeting =>
                   <tr key={meeting.id}>
                     <th scope="row">{meeting.id}</th>
-                    <td>{meeting.studentId}</td>
+                    <td>{meeting.student.FIO}</td>
                     <td>{meeting.reason}</td>
                     <td>{meeting.result}</td>
                   </tr>

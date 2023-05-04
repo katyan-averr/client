@@ -29,7 +29,7 @@ const StudentSelection = observer(({show, onHide}) => {
     //             </Dropdown.Menu>
     // </Dropdown>
 
-      <select class="form-select">
+      <select className="form-select">
         {item.map(student =>
         <option onClick={() => meeting.setSelectedStudent(student)} key={student.id}>{student.FIO}</option>)}
       </select>
