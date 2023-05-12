@@ -14,6 +14,7 @@ const Meetings = observer(() => {
   const {meeting} = useContext(Context)
   const {student} = useContext(Context)
   const [item, setItems] = useState([]);
+  let number = 0;
 
   useEffect(() => {
     axios
@@ -56,7 +57,7 @@ const Meetings = observer(() => {
                 <tbody>
                 {item.map(meeting =>
                   <tr key={meeting.id}>
-                    <th scope="row">{meeting.id}</th>
+                    <th scope="row">{number = number + 1}</th>
                     <td>{meeting.student.FIO}</td>
                     <td>{meeting.reason}</td>
                     <td>{meeting.result}</td>

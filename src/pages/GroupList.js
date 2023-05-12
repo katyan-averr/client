@@ -2,19 +2,32 @@ import "../App.css";
 import { Link } from 'react-router-dom';
 import GroupSelection from "../components/GroupSelection"
 import axios from "axios";
-import React, { useContext, createContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from '..';
 import { observer } from 'mobx-react-lite';
 
 const GroupList = observer(() => {
   const {student} = useContext(Context)
   const [item, setItems] = useState([]);
+  const [groupId, setGroupId] = useState('1')
+  let number = 0;
+
+  const fetchItems= () => {
+    axios
+      .get("http://localhost:5000/api/students?groupId=" + groupId)
+      .then((response) => setItems(response.data));
+  }
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/students")
-      .then((response) => setItems(response.data));
+    fetchItems();
   }, []);
+  
+  const handleGroupChange = (value) =>{
+    setGroupId(value)
+    fetchItems();
+  }
+
+  console.log(groupId)
 
   return (
     <div className="container main_margins">
@@ -32,7 +45,7 @@ const GroupList = observer(() => {
             </td>
             <td width={'70%'} className="heading">Список группы</td>
             <td width={'15%'} >
-              <GroupSelection  />
+              <GroupSelection onChange={handleGroupChange} />
             </td>
           </tr>
           <tr>
@@ -47,13 +60,14 @@ const GroupList = observer(() => {
                 <tbody>
                 {item.map(student =>
                   <tr key={student.id}>
-                    <th scope="row">{student.id}</th>
+                    <th scope="row">{number = number + 1}</th>
                     <td>{student.FIO}</td>
                   </tr>
                 )}
                 </tbody>
               </table>
             </td>
+            
           </tr>
       </table>
     </div>

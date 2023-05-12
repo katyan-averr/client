@@ -1,12 +1,19 @@
-import React, { useContext, createContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import "../App.css";
 import { Context } from "..";
 import axios from "axios";
 
-const GroupSelection = observer(() => {
+const GroupSelection = observer(({onChange}) => {
   const { group } = useContext(Context);
   const [item, setItems] = useState([]);
+  const [groupId, setGroupId] = useState('');
+
+
+  const handleGroupChange = (event) =>{
+    setGroupId(event.target.value)
+    onChange(event.target.value)
+  }
 
   useEffect(() => {
     axios
@@ -15,10 +22,11 @@ const GroupSelection = observer(() => {
   }, []);
   
   return (
-    <select className="form-select">
+    <select className="form-select"
+    onChange={handleGroupChange}>
         {item.map(group =>
         <option 
-        onClick={() => group.setSelectedGroup(group)}
+        value={group.id}
         key={group.id}
         >{group.name}</option>)}
       </select> 

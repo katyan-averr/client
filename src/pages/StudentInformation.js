@@ -5,11 +5,11 @@ import React, { useContext, createContext, useEffect, useState } from "react";
 import { Context } from '..';
 import { observer } from 'mobx-react-lite';
 import axios from "axios";
-import moment from 'moment';
 
 const StudentInformation = observer(() => {
   const {student} = useContext(Context)
   const [item, setItems] = useState([]);
+  let number = 0;
 
   useEffect(() => {
     axios
@@ -53,7 +53,7 @@ const StudentInformation = observer(() => {
                 <tbody>
                 {item.map(student =>
                   <tr key={student.id}>
-                    <th scope="row">{student.id}</th>
+                    <th scope="row">{number = number + 1}</th>
                     <td>{student.FIO}</td>
                     <td>{student.birthdate}</td>
                     <td>{student.contacts}</td>

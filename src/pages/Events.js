@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import React, { useContext, createContext, useEffect, useState } from "react";
 import { Context } from '..';
 import { observer } from 'mobx-react-lite';
-import { Container } from "react-bootstrap";
 import GroupSelection from "../components/GroupSelection"
 import axios from "axios";
+import AddEvents from "../components/AddEvents";
 
 const Events = observer(() => {
-
+  const [AddEventVisible, setAddEventVisible] = useState(false)
   const {event} = useContext(Context)
   const [item, setItems] = useState([]);
+  let number = 0;
 
   useEffect(() => {
     axios
@@ -33,7 +34,7 @@ const Events = observer(() => {
               </Link>
             </td>
             <td width={'33%'} className="heading">Мероприятия</td>
-            <td width={'17%'}><button type="button" className="btn btn-outline-primary button_menu">Добавить запись</button></td>
+            <td width={'17%'}><button type="button" className="btn btn-outline-primary button_menu" onClick={() => setAddEventVisible(true)}>Добавить запись</button></td>
             <td width={'17%'}>
               <GroupSelection />
             </td>
@@ -49,17 +50,19 @@ const Events = observer(() => {
                     <th scope="col">Ответственный</th>
                     <th scope="col">Дата проведения</th>
                     <th scope="col">Участники</th>
+                    <th scope="col">Примечание</th>
                   </tr>
                 </thead>
                 <tbody>
                 {item.map(event =>
                   <tr key={event.id}>
-                    <th scope="row">{event.id}</th>
+                    <th scope="row">{number = number + 1}</th>
                     <td>{event.name}</td>
                     <td>{event.place}</td>
                     <td>{event.responsible}</td>
                     <td>{event.date}</td>
                     <td>{event.student.FIO}</td>
+                    <td>{event.note}</td>
                   </tr>
                 )}
                 </tbody>
@@ -67,6 +70,7 @@ const Events = observer(() => {
             </td>
           </tr>
       </table>
+      <AddEvents show={AddEventVisible} onHide={() => setAddEventVisible(false)} />
     </div>
   );
 })

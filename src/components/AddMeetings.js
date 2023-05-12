@@ -1,24 +1,21 @@
-import React, { useContext, createContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Context } from '..';
 import {Button, Dropdown, Form, Modal} from "react-bootstrap";
 import axios from "axios";
-import StudentSelection from "./StudentSelection";
 
 const AddMeetings = observer(({show, onHide}) => {
     
     const {meeting} = useContext(Context)
+    const {student} = useContext(Context)
     const [item, setItems] = useState([]);
     const [reason, setReason] = useState('');
     const [result, setResult] = useState('');
+    const [studentId, setStudentId] = useState(null);
 
     const addMeeting = (() =>{
-      // const formData = new FormData()
-      // formData.append('reason', reason)
-      // formData.append('result', result)
-      // formData.append('studentId', studentId)
       axios
-        .post("http://localhost:5000/api/meetings", {reason:reason, result: result, studentId:'1'}).then(data => onHide());
+        .post("http://localhost:5000/api/meetings", {reason:reason, result: result, studentId: studentId}).then(data => onHide());
     });
 
     useEffect(() => {
@@ -52,9 +49,9 @@ const AddMeetings = observer(({show, onHide}) => {
                 className="mt-2 mb-2"
                 placeholder={"Результат встречи"}
             />
-            <select class="form-select">
+            <select class="form-select" onChange={e => setStudentId(e.target.value)}>
               {item.map(student =>
-                <option key={student.id}>{student.FIO}</option>)}
+                <option value={student.id} key={student.id}>{student.FIO}</option>)}
             </select> 
         </Form>
       </Modal.Body>

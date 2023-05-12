@@ -2,18 +2,30 @@ import "../App.css";
 import { Link } from 'react-router-dom';
 import GroupSelection from "../components/GroupSelection"
 import axios from "axios";
-import React, { useContext, createContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from '..';
 
 function Teachers() {
   const {load} = useContext(Context)
   const [item, setItems] = useState([]);
+  const [groupId, setGroupId] = useState('1')
+  let number = 0;
+
+  const fetchItems= () => {
+    axios
+      .get("http://localhost:5000/api/loads?groupId=" + groupId)
+      .then((response) => setItems(response.data));
+  }
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/loads")
-      .then((response) => setItems(response.data));
+    fetchItems();
   }, []);
+  
+  const handleGroupChange = (value) =>{
+    setGroupId(value)
+    fetchItems();
+  }
+
   return (
     <div className="container main_margins">
       <table>
@@ -30,7 +42,7 @@ function Teachers() {
             </td>
             <td width={'70%'} className="heading">Преподаватели</td>
             <td width={'15%'}>
-              <GroupSelection />
+              <GroupSelection onChange={handleGroupChange}/>
             </td>
           </tr>
           <tr>
@@ -48,7 +60,7 @@ function Teachers() {
                 <tbody>
                 {item.map(load =>
                   <tr key={load.id}>
-                    <th scope="row">{load.id}</th>
+                    <th scope="row">{number = number + 1}</th>
                     <td>{load.teacher.FIO}</td>
                     <td>{load.discipline.name}</td>
                     <td>{load.type}</td>
